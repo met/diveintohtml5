@@ -1,6 +1,0 @@
-CO PREFEROVAT?
-
-HTML elements = HTML elementy vs *HTML prvky* (vs prvky HTML)
-DOM - sklonovat nebo ne? *v DOMu* vs v DOM
-email - e-mail vs email ??
-Ask Professor Markup = Zeptejte se profesora Značky
