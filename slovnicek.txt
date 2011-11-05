@@ -1,0 +1,30 @@
+TERMINOLOGICKY SLOVNICEK
+
+Prosim prekladatele, aby obsah tohoto souboru sledovali.
+pripadne komentovali nebo doplnovali vlastni navrhy:
+https://github.com/met/diveintohtml5/blob/master/slovnicek.txt
+
+---------------------------------------------------------------------
+ CO PREFEROVAT?
+---------------------------------------------------------------------
+
+storage - úložiště
+email - *e-mail* nikoliv email
+DOM - *v DOMu* místo v DOM, tj. skloňovat
+offline - offline (tj. nepřekládat)
+
+HTML elements - elementy HTML vs *prvky HTML* // JESTE DEBATUJEME S JIRKOU KOSKEM, ktery doporucuje "elementy HTML"
+
+Jakého rodu je HTML - "ten HTML něco definoval" nebo "to HTML definovalo" ???
+canvas - canvas vs platno ???
+Web Workers - ???
+placeholder - ???
+cache manifest (file) - ???
+cache/caching - cache/cachování vs keš/kešování ???
+
+---------------------------------------------------------------------
+ FRÁZE Z KNIHY
+---------------------------------------------------------------------
+
+Ask Professor Markup - Zeptejte se profesora Značky
+
