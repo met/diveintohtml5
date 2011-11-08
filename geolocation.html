@@ -10,153 +10,152 @@ body{counter-reset:h1 6}
 <link rel=stylesheet media='only screen and (max-device-width: 480px)' href=mobile.css>
 <link rel=prefetch href=index.html>
 <p>You are here: <a href=index.html>Home</a> <span class=u>&#8227;</span> <a href=table-of-contents.html#geolocation>Dive Into <abbr>HTML5</abbr></a> <span class=u>&#8227;</span>
-<h1><br>You Are Here<br>(And So Is Everybody Else)</h1>
+<h1><br>Vy jste tady <br>(stejně jako všichni ostatní)</h1>
 <p id=toc>&nbsp;
 <p class=a>&#x2767;
 <h2 id=divingin>Diving In</h2>
 
-<p class=f><img src=i/aoc-g.png alt=G width=106 height=103>eolocation is the art of figuring out where you are in the world and (optionally) sharing that information with people you trust. There is more than one way to figure out where you are &mdash; your <abbr>IP</abbr> address, your wireless network connection, which cell tower your phone is talking to, or dedicated <abbr>GPS</abbr> hardware that calculates latitude and longitude from information sent by satellites in the sky.
+<p class=f><img src=i/aoc-g.png alt=G width=106 height=103>eolokace je umění zjistit kde ve světě jste a (volitelně) sdílet tuto informaci s lidmi, kterým věříte. Existuje více cest jak přijít na to kde jste &mdash; vaše <abbr>IP</abbr> adresa, vaše bezdrátové připojení, se kterou základnovou stanicí mluví váš telefon nebo jednoúčelový <abbr>GPS</abbr> hardware, který počítá zeměpisnou šířku a výšku z informací od satelitů na obloze.
 
 <div class=pf>
-<h4>Ask Professor Markup</h4>
-<div class=inner>
+<h4>Zeptejte se profesora Značky</h4>
+<div class=inner>		
 <blockquote class=note>
-<p><span>&#x261E;</span>Q: Geolocation sounds scary. Can I turn it off?<br>
-A: Privacy is an obvious concern when you&#8217;re talking about sharing your physical location with a remote web server. The <a href=http://www.w3.org/TR/geolocation-API/#security>geolocation <abbr>API</abbr> explicitly states</a>: &#8220;User Agents must not send location information to Web sites without the express permission of the user.&#8221; In other words, sharing your location is always opt-in. If you don&#8217;t want to, you don&#8217;t have to.
+<p><span>&#x261E;</span>Q: Geolokace zní děsivě. Mohu ji vypnout?<br>
+A: Soukromí je zřejmá obava když mluvíme o sdílení vaší fyzické lokace se vzdáleným webovým serverem. <a href=http://www.w3.org/TR/geolocation-API/#security> <abbr>API</abbr> geolokace explicitně stanoví</a>: &#8220;User Agenti nesmí webové stránce posílat informace o pozici bez výslovného svolení uživatele.&#8221; Jinými slovy, sdílení vaší lokace je vždy volitelné. Pokud nechcete, nemusíte.
 </blockquote>
 </div>
 </div>
 
 <p class=a>&#x2767;
 
-<h2 id=w3c>The Geolocation API</h2>
+<h2 id=w3c>API geolokace</h2>
 
-<p>The <a href=http://www.w3.org/TR/geolocation-API/>geolocation <abbr>API</abbr></a> lets you share your location with trusted web sites. The latitude and longitude are available to JavaScript on the page, which in turn can send it back to the remote web server and do fancy location-aware things like finding local businesses or showing your location on a map.
+<p><a href=http://www.w3.org/TR/geolocation-API/><abbr>API</abbr> geolokace</a> vám umožní sdílet vaši lokaci s důvěryhodnými webovými stránkami. Zeměpisná šířka a výška jsou dostupné javascriptu na stránce, který je může předat dál vzdálenému webovému serveru a provádět na pozici závislé činnosti jako nalézání místních firem nebo zobrazení vaší lokace na mapě.
 
-<p>As you can see from the following table, the geolocation <abbr>API</abbr> is supported by most browsers on the desktop and mobile devices. Additionally, some older browsers and devices can be supported by wrapper libraries, as we&#8217;ll see later in this chapter.
+<p>Jak můžete vidět z následující tabulky, geolokační <abbr>API</abbr> je podporováno většinou prohlížečů na stolních a mobilních zařízeních. Některé starší prohlížeče a zařízení mohou být navíc podporována skrze obalové [wrapper] knihovny jak uvidíme dále v této kapitole.
 
 <table class=bc>
-<caption>Geolocation <abbr>API</abbr> support</caption>
+<caption>Podpora <abbr>API</abbr> geolokace</caption>
 <thead>
 <tr><th title="Internet Explorer">IE<th title="Mozilla Firefox">Firefox<th title="Apple Safari">Safari<th title="Google Chrome">Chrome<th>Opera<th>iPhone<th>Android
 <tbody>
 <tr><td>9.0+<td>3.5+<td>5.0+<td>5.0+<td>10.6+<td>3.0+<td>2.0+
 </table>
 
-<p>Along with support for the standard geolocation <abbr>API</abbr>, there are a plethora of device-specific <abbr>API</abbr>s on other mobile platforms. I&#8217;ll cover all that later in this chapter.
+<p>Společně s podporou pro standardní geolokační <abbr>API</abbr> existuje spousta zařízení-specifických <abbr>API</abbr> na dalších mobilních platformách. Tohle všechno proberu v dalších částech této kapitoly.
 
 <p class=a>&#x2767;
 
-<h2 id=the-code>Show Me The Code</h2>
+<h2 id=the-code>Ukažte mi kód</h2>
 
-<p>The geolocation <abbr>API</abbr> centers around a new property on the global <code>navigator</code> object: <code>navigator.geolocation</code>. <p>The simplest use of the geolocation <abbr>API</abbr> looks like this:
+<p><abbr>API</abbr> geolokace je soustředěné kolem nové vlastnosti globálního objektu <code>navigator</code>: <code>navigator.geolocation</code>. <p>Nejjednodušší použití <abbr>API</abbr> geolokace vypadá následovně:
 
 <pre><code>function get_location() {
   <mark>navigator.geolocation.getCurrentPosition</mark>(show_map);
 }</code></pre>
 
-<p>That has no detection, no error handling, and no options. Your web application should probably include at least the first two of those. To <a href=detect.html#geolocation>detect support for the geolocation <abbr>API</abbr></a>, you can use <a href=http://www.modernizr.com/>Modernizr</a>:
+<p>V této podobně nedochází ani ke zjištění podpory geolokace, ani zpracování chyb a nelze nic nastavit. Vaše webová aplikace by pravděpodobně měla obsahovat při nejmenším první dvě jmenované vlastnosti. Pro <a href=detect.html#geolocation>detekci podpory <abbr>API</abbr> geolokace</a> můžete použít <a href=http://www.modernizr.com/>Modernizr</a>:
 
 <pre style="float:left;padding-left:0"><code>function get_location() {
   if (<mark>Modernizr.geolocation</mark>) {
     navigator.geolocation.getCurrentPosition(show_map);
   } else {
-    // no native support; maybe try Gears?
+    // není přirozená podpora; možná zkusit Gears?
   }
 }</code></pre>
-<p class="legend right" style="margin-top:2.5em"><span class=arrow>&nbsp;&#x21dc;</span> I CAN HAS GEO?
+<p class="legend right" style="margin-top:2.5em"><span class=arrow>&nbsp;&#x21dc;</span> JÁ MOCT GEO?
 
-<p class=clear>What you do without geolocation support is up to you. I&#8217;ll explain the Gears fallback option in a minute, but first I want to talk about what happens <em>during</em> that call to <code>getCurrentPosition()</code>. As <a href=#divingin>I mentioned at the beginning of this chapter</a>, geolocation support is <em>opt-in</em>. That means your browser will never force you to reveal your current physical location to a remote server. The user experience differs from browser to browser. In Mozilla Firefox, calling the <code>getCurrentPosition()</code> function of the geolocation <abbr>API</abbr> will cause the browser to pop up an &#8220;infobar&#8221; at the top of the browser window. The infobar looks like this:
+<p class=clear>Co uděláte bez podpory je na vás. Možnost využít Gears (když není podpora) vysvětlím za chvíli, nejdříve chci totiž mluvit o tom, co se děje <em>během</em> volání <code>getCurrentPosition()</code>. Jak už <a href=#divingin>jsem zmínil na začátku kapitoly</a>, podpora geolokace je <em>volitelná</em>. Což znamená, že váš prohlížeč vás nikdy nemůže nutit předat vaši aktuální pozici vzdálenému serveru. Co uvidí uživatel se liší problížeč od prohlížeče. Zavolání funkce <code>getCurrentPosition()</code> z <abbr>API</abbr> geolokace například v Mozille zobrazí  &#8220;infobar&#8221; v horní části okna prohlížeče. Infobar vypadá následovně:
 
 <p class=c><img src=i/geolocation-opt-in.png alt="Geolocation opt-in infobar" width=737 height=32>
 
-<p>There&#8217;s a lot going on here. You, as the end user,
+<p>Po zavolání se toho začně dít spoustu. Vy, jako koncový uživatel,
 
 <ul>
-<li>are told that a website wants to know your location
-<li>are told <em>which</em> website wants to know your location
-<li>can click through to <a href=http://www.mozilla.com/en-US/firefox/geolocation/>Mozilla&#8217;s &#8220;Location-Aware Browsing&#8221; help page</a> which explains what the heck is going on (short story: Google provides the location and stores your data in accordance with its <a href=http://www.google.com/intl/en/privacy/lsf.html>Location Service Privacy Policy</a>)
-<li>can choose to share your location
-<li>can choose <em>not</em> to share your location
-<li>can tell your browser to remember your choice (either way, share or don&#8217;t share) so you never see this infobar again on this website
+<li>se dozvíte, že webová stránka chce znát vaši pozici
+<li>se dozvíte, <em>která</em> webová stránka chce znát vaši pozici
+<li>můžete kliknout na <a href=http://www.mozilla.com/en-US/firefox/geolocation/>Mozilla&#8217;s &#8220;Location-Aware Browsing&#8221; help page</a>, kde vám vysvětlí, co se to krucinál děje (krátký příběh: Google poskytuje geolokaci a skladuje vaše data v souladu s <a href=http://www.google.com/intl/en/privacy/lsf.html>Location Service Privacy Policy</a>)
+<li>můžete povolit sdílení vaší pozice
+<li>můžete <em>zakázat</em> sdílení vaší pozice
+<li>můžete říct svému prohlížeči, aby si zapamatoval vaši volbu (ať už jakoukoli, sdílet nebo nesdílet), takže infobar se vám pro tyto konkrétní stránky již neukáže
 </ul>
 
-<p>Furthermore, this infobar is
+<p>Infobar je navíc
 
 <ul>
-<li>non-modal, so it won&#8217;t prevent you from switching to another browser window or tab
-<li>tab-specific, so it will disappear if you switch to another browser window or tab and reappear when you switch back to the original tab
-<li>unconditional, so there is no way for a website to bypass it
-<li>blocking, so there is no chance that the website can determine your location while it&#8217;s waiting for your answer
+<li>nemodální, takže vám nezabrání přepnout se do jiného okna prohlížeče či záložky
+<li>specifický pro záložku - zmizí, když se přepnete do jiného okna nebo záložky, a objeví se, když se vrátíte do záložky původní
+<li>bezpodmínečný, čili pro webovou stránku neexistuje způsob, jak ho obejít
+<li>blokující, aneb webová stránka nemá šanci určit vaši pozici, dokud čeká na vaši odpověď
 </ul>
 
-<p>You just saw the JavaScript code that causes this infobar to appear. It&#8217;s a single function call which takes a callback function (which I called <code>show_map</code>). The call to <code>getCurrentPosition()</code> will return immediately, but that doesn&#8217;t mean that you have access to the user&#8217;s location. The first time you are guaranteed to have location information is in the callback function. The callback function looks like this:
+<p>Právě jste viděli kód v JavaScriptu, který vyvolá zobrazaní infobaru. Je to jediná funkce, která přijímá jako argument &#8220;callback&#8221; funkci (nazval jsem ji <code>show_map</code>). Zavolání <code>getCurrentPosition()</code> vrátí návratovou hodnotu okamžitě, nicméně to neznamená, že jste získali přístup k pozici uživatele. Pozici uživatele máte garantovanou teprve až uvnitř callback funkce. Callback funkce vypadá následovně:
 
 <pre><code>function show_map(position) {
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
-  // let's show a map or do something interesting!
+  // zobrazme mapu nebo udělejme něco zajímavého!
 }</code></pre>
 
-<p>The callback function will be called with a single parameter, an object with two properties: <code>coords</code> and <code>timestamp</code>. The timestamp is just that, the date and time when the location was calculated. (Since this is all happening asynchronously, you can&#8217;t really know when that will happen in advance. It might take some time for the user to read the infobar and agree to share their location. Devices with dedicated <abbr>GPS</abbr> hardware may take some more time to connect to a <abbr>GPS</abbr> satellite. And so on.) The <code>coords</code> object has properties like <code>latitude</code> and <code>longitude</code> which are exactly what they sound like: the user&#8217;s physical location in the world.
-
+<p>Callback funkce bude zavolaná s jediným parametrem, objektem se dvěma vlastnostmi: <code>coords</code> a <code>timestamp</code>. Timestamp je jen časová známka, datum a čas, kdy byla pozice spočítaná. (Protože se všechno děje asynchronně, nikdy dopředu nevíte, kdy se to stane. Uživateli může nějakou dobu trvat, než si přečte infobar a odsouhlasí sdílení svojí pozice. Zařízení se specializovaným <abbr>GPS</abbr> hardwarem potřebují nějaký čas k připojení k <abbr>GPS</abbr> satelitu, atd.) Objekt <code>coords</code> má vlastnosti jako <code>latitude</code> (zaměpisná šířka) and <code>longitude</code> (zeměpisná délka), které reprezentují skutečnou pozici uživatele na světě.
 <table class=st>
-<caption>Position Object</caption>
-<tr class=ho><th>Property<th>Type<th>Notes
-<tr class=zebra><th><code>coords.latitude</code><td>double<td>decimal degrees
-<tr><th><code>coords.longitude</code><td>double<td>decimal degrees
-<tr class=zebra><th><code>coords.altitude</code><td>double or <code>null</code><td>meters above the <a href=http://en.wikipedia.org/wiki/Reference_ellipsoid>reference ellipsoid</a>
-<tr><th><code>coords.accuracy</code><td>double<td>meters
-<tr class=zebra><th><code>coords.altitudeAccuracy</code><td>double or <code>null</code><td>meters
-<tr><th><code>coords.heading</code><td>double or <code>null</code><td>degrees clockwise from <a href=http://en.wikipedia.org/wiki/True_north>true north</a>
-<tr class=zebra><th><code>coords.speed</code><td>double or <code>null</code><td>meters/second
-<tr><th><code>timestamp</code><td>DOMTimeStamp<td>like a <code>Date()</code> object
+<caption>Objekt Position</caption>
+<tr class=ho><th>Vlastnost<th>Typ<th>Poznámky
+<tr class=zebra><th><code>coords.latitude</code><td>double<td>zeměpisné šířka ve stupních (s desetinnou čárkou)
+<tr><th><code>coords.longitude</code><td>double<td>zeměpisná délka ve stupních (s desetinnou čárkou)
+<tr class=zebra><th><code>coords.altitude</code><td>double nebo <code>null</code><td>výška v metrech nad <a href=http://en.wikipedia.org/wiki/Reference_ellipsoid>referenčním elipsoidem</a>
+<tr><th><code>coords.accuracy</code><td>double<td>přesnost v metrech
+<tr class=zebra><th><code>coords.altitudeAccuracy</code><td>double nebo <code>null</code><td>přesnost výšky v metrech
+<tr><th><code>coords.heading</code><td>double nebo <code>null</code><td>směr ve stupních (ve směru ručiček počínaje <a href=http://en.wikipedia.org/wiki/True_north>skutečným severem</a>)
+<tr class=zebra><th><code>coords.speed</code><td>double nebo <code>null</code><td>rychlost v metrech za sekundu
+<tr><th><code>timestamp</code><td>DOMTimeStamp<td>časová známka jako <code>Date()</code> objekt
 </table>
 
 <p class=ss style="margin-top:1.75em"><img src=i/openclipart.org_johnny_automatic_riding_a_bike.png width=196 height=239 alt="boy riding a bicycle">
 
-<p>Only three of the properties are guaranteed to be there (<code>coords.latitude</code>, <code>coords.longitude</code>, and <code>coords.accuracy</code>). The rest might come back <code>null</code>, depending on the capabilities of your device and the backend positioning server that it talks to. The <code>heading</code> and <code>speed</code> properties are calculated based on the user&#8217;s previous position, if possible.
+<p>Pouze tři vlastnosti jsou garantované (<code>coords.latitude</code>, <code>coords.longitude</code> a <code>coords.accuracy</code>). Zbytek se může vrátit jako <code>null</code> v závislosti na schopnostech vašeho zařízení a pozičního serveru, se kterým mluví. Vlastnosti <code>heading</code> a <code>speed</code> jsou počítané na základě předchozí pozice uživatele, pokud je to možné.
 
 <p class=a>&#x2767;
 
-<h2 id=errors>Handling Errors</h2>
+<h2 id=errors>Zpracování chyb</h2>
 
-<p>Geolocation is complicated. Things can go wrong. I&#8217;ve mentioned the &#8220;user consent&#8221; angle already. If your web application wants the user&#8217;s location but the user doesn&#8217;t want to give it to you, you&#8217;re screwed. The user always wins. But what does that look like in code? It looks like the second argument to the <code>getCurrentPosition()</code> function: an error handling callback function.
+<p>Geolokace je komplikovaná. Spoustu věcí se může pokazit. O problému se souhlasem uživatele jsem se už zmínil. Pokud chce vaše aplikace znát polohu uživatele, ale uživatel vám ji dát nechce, jste nahraní. Uživatel má prostě navrch. Ale jak tohle vypadá v kódu? Inu jako druhý argument funkce <code>getCurrentPosition()</code>: aneb callback funkce, která řeší zpracování chyby.
 
 <pre><code>navigator.geolocation.getCurrentPosition(
   show_map, <mark>handle_error</mark>)</code></pre>
 
-<p>If anything goes wrong, your error callback function will be called with a <code>PositionError</code> object.
+<p>Ať už se pokazí cokoliv, vaše chybová callback funkce bude zavolaná s objektem <code>PositionError</code>.
 
 <table class=st>
-<caption>PositionError Object</caption>
-<tr class=ho><th>Property<th>Type<th>Notes
-<tr class=zebra><th><code>code</code><td>short<td>an enumerated value
-<tr><th><code>message</code><td>DOMString<td>not intended for end users
+<caption>PositionError Objekt</caption>
+<tr class=ho><th>Vlastnost<th>Typ<th>Poznámky
+<tr class=zebra><th><code>code</code><td>short<td>hodnota ze seznamu
+<tr><th><code>message</code><td>DOMString<td>není určená pro koncové uživatele
 </table>
 
-<p>The <code>code</code> property will be one of
+<p>Vlastnost <code>code</code> bude jedna z
 
 <ul>
-<li><code>PERMISSION_DENIED</code> (<code>1</code>) if the user clicks that &#8220;Don&#8217;t Share&#8221; button or otherwise denies you access to their location.
-<li><code>POSITION_UNAVAILABLE</code> (<code>2</code>) if the network is down or the positioning satellites can&#8217;t be contacted.
-<li><code>TIMEOUT</code> (<code>3</code>) if the network is up but it takes too long to calculate the user&#8217;s position. How long is &#8220;too long&#8221;? I&#8217;ll show you how to define that in the next section.
-<li><code>UNKNOWN_ERROR</code> (<code>0</code>) if anything else goes wrong.
+<li><code>PERMISSION_DENIED</code> (<code>1</code>) pokud uživatel klikne na &#8220;Nezdílet&#8221; tlačítko nebo vám jakkoli jinak zakáže přístup ke své pozici.
+<li><code>POSITION_UNAVAILABLE</code> (<code>2</code>) pokud nefunguje připojení nebo nelze kontaktovat poziční  satelity.
+<li><code>TIMEOUT</code> (<code>3</code>) připojení je funkční, ale výpočet pozice trvá přiliš dlouho. Jak dlouho je &#8220;příliš dlouho&#8221;? Jak tohle definovat vám ukážu v příští sekci.
+<li><code>UNKNOWN_ERROR</code> (<code>0</code>) když se pokazí něco jiného.
 </ul>
 
-<p class="legend top" style="padding-left:8.5em"><span class=arrow>&#x21b6;</span> Be gracious in defeat
+<p class="legend top" style="padding-left:8.5em"><span class=arrow>&#x21b6;</span> Buď velkorysý i v porážce
 <pre><code>function handle_error(err) {
   if (<mark>err.code</mark> == 1) {
-    // user said no!
+    // uživatel řekl ne!
   }
 }</code></pre>
 
 <div class=pf>
-<h4>Ask Professor Markup</h4>
+<h4>Zeptejte se profesora Značky</h4>
 <div class=inner>
 <blockquote class=note>
-<p><span>&#x261E;</span>Q: Does the geolocation <abbr>API</abbr> work on the International Space Station, on the moon, or on other planets?<br>
-A: <a href=http://www.w3.org/TR/geolocation-API/#coordinates_interface>The geolocation specification states</a>, &#8220;The geographic coordinate reference system used by the attributes in this interface is the World Geodetic System (2d) [WGS84]. No other reference system is supported.&#8221; The International Space Station is orbiting Earth, so <a href=http://twitter.com/Astro_TJ>astronauts on the station</a> can describe their location by latitude, longitude, and altitude. However, the World Geodetic System is Earth-centric, so it can&#8217;t be used to describe locations on the moon or on other planets.
+<p><span>&#x261E;</span>Q: Funguje <abbr>API</abbr> geolokace i na Mezinárodní vesmírné stanici, na měsíci nebo na dalších planetách?<br>
+A: <a href=http://www.w3.org/TR/geolocation-API/#coordinates_interface>Specifikace geolokace říká</a>, &#8220;Systém souřadnic použitý v tomto rozhraní je Světový geodetický systém (2d) [WGS84]. Žádný jiný systém podporovaný není.&#8221; Mezinárodní vesmírná stanice obíhá Zemi, takže <a href=http://twitter.com/Astro_TJ>astronauti na stanici</a> můžou popsat svoji pozici pomocí zeměpisné šířky, délky a výšky. Nicméně, Světový geodetický systém je centrický vzhledem k Zemi, takže nemůže být použit k popisu pozice na měsíci nebo jiných planetách.
 </blockquote>
 </div>
 </div>
@@ -343,7 +342,7 @@ A: <a href=http://www.w3.org/TR/geolocation-API/#coordinates_interface>The geolo
 <script src=j/gears_init.js></script>
 <script src=j/geo.js></script>
 <script src=j/dih5.js></script>
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAA9KK0oCozk3pdOlGYD6hrthR5pnyo8QWLgiiZq1vJ3YhZL8oiJBQk9j0jg4PxEDmO36mYgldwXseYGw"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script>
 function supports(bool, suffix) {
   var s = "Your browser ";
@@ -359,12 +358,10 @@ function lookup_location() {
 }
 function show_map(loc) {
   $("#geo-wrapper").css({'width':'320px','height':'350px'});
-  var map = new GMap2(document.getElementById("geo-wrapper"));
-  var center = new GLatLng(loc.coords.latitude,loc.coords.longitude);	
-  map.setCenter(center, 14);	
-  map.addControl(new GSmallMapControl());
-  map.addControl(new GMapTypeControl());
-  map.addOverlay(new GMarker(center, {draggable: false, title: "You are here (more or less)"}));
+  var map = new google.maps.Map(document.getElementById("geo-wrapper"), {zoom: 14, mapTypeControl:true, zoomControl: true, mapTypeId: google.maps.MapTypeId.ROADMAP});
+  var center = new google.maps.LatLng(loc.coords.latitude,loc.coords.longitude);  
+  map.setCenter(center);
+  var marker = new google.maps.Marker({map: map, position: center, draggable: false, title: "You are here (more or less)"});
 }
 function show_map_error() {
   $("#live-geolocation").html('Unable to determine your location.');
