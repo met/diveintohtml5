@@ -71,7 +71,7 @@ dl.col dt,dl.col dd{padding-bottom:1.75em}
 
 <h2 id=html-element>Kořenový prvek</h2>
 
-<p class=ss style="float:left;margin:0 1.75em 1.75em 0;width:280px"><img src=i/openclipart.org_johnny_automatic_tree_on_top_of_hill.png alt="tree on top of hill" width=280 height=394>
+<p class=ss style="float:left;margin:0 1.75em 1.75em 0;width:280px"><img src=i/openclipart.org_johnny_automatic_tree_on_top_of_hill.png alt="stom na kopci" width=280 height=394>
 
 <p><abbr>HTML</abbr> stránka je sekvencí vnořených prvků. Celá její struktura připomíná strom. Některé prvky jsou &bdquo;sourozenci&ldquo; jako dvě větve, které vyrůstají ze stejného kmene. Některé prvky jsou &bdquo;dětmi&ldquo; jiných prvků, jako když menší větev vyrůstá z větší větve. (Funguje to i obráceně; prvek, který obsahuje jiný prvek, je nazýván &bdquo;rodičem&ldquo; uzlů představujících jeho přímé děti a &bdquo;předkem&ldquo; svých vnoučat.) Bezdětné prvky se nazývají &bdquo;listy&ldquo;. Nejvnějšnější prvek, který je předkem všech ostatních prvků stránky, se nazývá &bdquo;kořenový prvek&ldquo;. Kořenovým prvkem <abbr>HTML</abbr> stránky je vždy <code>&lt;html></code>.
 
@@ -105,7 +105,7 @@ dl.col dt,dl.col dd{padding-bottom:1.75em}
 
 <h2 id=head-element>Prvek &lt;head></h2>
 
-<p class=c><img src=i/openclipart.org_johnny_automatic_8_from_behind.png alt="8 men from behind" width=554 height=164>
+<p class=c><img src=i/openclipart.org_johnny_automatic_8_from_behind.png alt="8 mužů zezadu" width=554 height=164>
 
 <p>Prvním dítětem kořenového prvku je obvykle prvek <code>&lt;head></code>. Obsahuje metadata&nbsp;&ndash; informace <em>o stránce</em>, nikoli její vlastní tělo. (Tělo stránky obsahuje, nepříliš překvapivě, prvek <code>&lt;body></code>.) Samotný prvek <code>&lt;head></code> je celkem nudný a v <abbr>HTML5</abbr> se nijak zajímavě nezměnil. Dobroty jsou <em>uvnitř</em> prvku <code>&lt;head></code>. A proto se opět obrátíme na <a href=examples/blog-original.html>naši ukázkovou stránku</a>:
 
@@ -233,7 +233,7 @@ dl.col dt,dl.col dd{padding-bottom:1.75em}
 
 <p><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#link-type-external>rel="external"</a> &bdquo;signalizuje, že odkaz vede na dokument, který nepatří do webu, jehož je tato stránka součástí.&ldquo; Myslím, že jako první jej zpopularizoval <a href=http://www.wordpress.org/>WordPress</a>, který jej používal u odkazů vložených komentujícími.
 
-<p class=ss style="width:313px"><img src=i/openclipart.org_johnny_automatic_girl_feeding_birds.png width=313 height=384 alt="girl feeding birds">
+<p class=ss style="width:313px"><img src=i/openclipart.org_johnny_automatic_girl_feeding_birds.png width=313 height=384 alt="dívka krmící ptáky">
 
 <p><abbr>HTML</abbr>&nbsp;4 definoval <a href=http://www.w3.org/TR/html401/types.html#type-links><code>rel="start"</code>, <code>rel="prev"</code> a <code>rel="next"</code></a> určující vztahy mezi stránkami, jež patří do určité posloupnosti (jako kapitoly v knize nebo třeba příspěvky v blogu). Jediný, který kdy byl používán korektně, je <code>rel="next"</code>. Lidé psali <code>rel="previous"</code> místo <code>rel="prev"</code>, používali <code>rel="begin"</code> a <code>rel="first"</code> místo <code>rel="start"</code> a <code>rel="end"</code> místo <code>rel="last"</code>. Ó, a&nbsp;&ndash; úplně sami&nbsp;&ndash; vytvořili <code>rel="up"</code> pro odkaz na &bdquo;rodičovskou&ldquo; stránku.
 
@@ -257,7 +257,7 @@ dl.col dt,dl.col dd{padding-bottom:1.75em}
 
 <p><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#link-type-pingback>rel="pingback"</a> určuje adresu &bdquo;pingback&ldquo; serveru. Jak vysvětluje <a href=http://hixie.ch/specs/pingback/pingback-1.0>specifikace Pingback</a>, &bdquo;Systém pingback představuje způsob jak automaticky informovat blog, když na něj odkáže jiný webový server. &hellip; Umožňuje zpětné odkazy&nbsp;&ndash; cestu, jak se vracet řetězcem odkazů, aniž by člověk musel všechny procházet.&ldquo; Blogovací systémy, zejména WordPress, implementují mechanismy pingback, aby upozorňovaly autory, že jste na ně odkázali ve svých nových příspěvcích do blogu.
 
-<p class=ss style="float:left;margin:0 1.75em 1.75em 0;width:271px"><img src=i/openclipart.org_johnny_automatic_dog_on_chair.png width=271 height=309 alt="dog on chair">
+<p class=ss style="float:left;margin:0 1.75em 1.75em 0;width:271px"><img src=i/openclipart.org_johnny_automatic_dog_on_chair.png width=271 height=309 alt="pes na křesle">
 
 <p><a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#link-type-prefetch>rel="prefetch"</a> &bdquo;naznačuje, že předběžné stažení daného zdroje a jeho uložení do vyrovnávací paměti bude nejspíš výhodné, protože je velmi pravděpodobné, že uživatel bude zdroj potřebovat&ldquo;. Vyhledávače někdy přidávají <code>&lt;link rel="prefetch" href="<i>URL nejlepšího výsledku hledání</i>"></code> do stránky s výsledky hledání, pokud mají pocit, že nejlepší nalezená stránka je mnohem populárnější, než ty ostatní. Například: pomocí Firefoxu <a href="http://www.google.com/search?q=cnn">si nechte Googlem vyhledat CNN</a>, podívejte se na zdrojový kód a hledejte slovo <code>prefetch</code>. Mozilla Firefox je jediný současný prohlížeč, který podporuje <code>rel="prefetch"</code>.
 
@@ -432,7 +432,7 @@ p (sourozenec h1)
 
 <h2 id=header-element>Nadpisy</h2>
 
-<p class=ss style="width:205"><img src=i/openclipart.org_johnny_automatic_newsboy.png alt="newsboy hawking newspaper" width=205 height=335>
+<p class=ss style="width:205"><img src=i/openclipart.org_johnny_automatic_newsboy.png alt="kamelot prodávající noviny" width=205 height=335>
 
 <p>Vraťme se k naší <a href=examples/blog-original.html>ukázkové stránce</a>. Konkrétně se teď podívejme jen na její nadpisy:
 
@@ -612,7 +612,7 @@ p (sourozenec h1)
 
 <h2 id=time-element>Datum a čas</h2>
 
-<p class=ss style="float:left;margin:0 30px 0 0"><img src=i/openclipart.org_johnny_automatic_clock_tower.png width=205 height=378 alt="clock tower">
+<p class=ss style="float:left;margin:0 30px 0 0"><img src=i/openclipart.org_johnny_automatic_clock_tower.png width=205 height=378 alt="věž s hodinami">
 
 <p>Je to vzrušující, co? Podle mě není vzrušující sjet nahý na lyžích Mount Everest a recitovat při tom americkou hymnu, ale je pořádně vzrušující, jak daleko se dá dotáhnout sémantický kód. Pojďme pokračovat s naší <a href=examples/blog-original.html>ukázkovou stránkou</a>. Další řádek, na který se zaměřím, je tenhle:
 
@@ -685,7 +685,7 @@ p (sourozenec h1)
 
 <h2 id=nav-element>Navigace</h2>
 
-<p class=ss><img src=i/openclipart.org_johnny_automatic_a_pink.png alt="a man navigating a sailboat on the water" width=345 height=377>
+<p class=ss><img src=i/openclipart.org_johnny_automatic_a_pink.png alt="muž řídící plachetnici na vodě" width=345 height=377>
 
 <p>Jednou z nejdůležitějších částí každého webu je navigační lišta. CNN.com má na každé stránce nahoře &bdquo;záložky&ldquo;, které odkazují na různé zpravodajské sekce&nbsp;&ndash; &bdquo;Technika&ldquo;, &bdquo;Zdraví&ldquo;, &bdquo;Sport&ldquo;&nbsp;atd. Stránka s výsledky hledání na Google obsahuje nahoře podobný proužek, který vám umožňuje vyhledávat v různých službách Google&nbsp;&ndash; &bdquo;Obrázky&ldquo;, &bdquo;Videa&ldquo;, &bdquo;Mapy&ldquo;&nbsp;atd. A <a href=examples/blog-original.html>naše ukázková stránka</a> má v záhlaví navigační lištu, která obsahuje odkazy na různé části hypotetického webu&nbsp;&ndash; &bdquo;domů&ldquo;, &bdquo;blog&ldquo;, &bdquo;galerie&ldquo; a &bdquo;o nás&ldquo;.
 
