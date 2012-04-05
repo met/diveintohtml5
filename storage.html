@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Local Storage - Dive Into HTML5</title>
+<title>Lokální úložiště - Dive Into HTML5</title>
 <!--[if lt IE 9]><script src=j/html5.js></script><![endif]-->
 <link rel=alternate type=application/atom+xml href=https://github.com/diveintomark/diveintohtml5/commits/master.atom>
 <link rel=stylesheet href=screen.css>
@@ -9,70 +9,70 @@ body{counter-reset:h1 7}
 </style>
 <link rel=stylesheet media='only screen and (max-device-width: 480px)' href=mobile.css>
 <link rel=prefetch href=detect.html>
-<p>You are here: <a href=index.html>Home</a> <span class=u>&#8227;</span> <a href=table-of-contents.html#storage>Dive Into <abbr>HTML5</abbr></a> <span class=u>&#8227;</span>
-<h1><br>The Past, Present &amp; Future of Local Storage for Web Applications</h1>
+<p>Navigace: <a href=index.html>Domů</a> <span class=u>&#8227;</span> <a href=table-of-contents.html#storage>Dive Into <abbr>HTML5</abbr></a> <span class=u>&#8227;</span>
+<h1><br>Minulost, současnost &amp; budoucnost lokálního úložiště pro webové aplikace</h1>
 <p id=toc>&nbsp;
 <p class=a>&#x2767;
-<h2 id=divingin>Diving In</h2>
+<h2 id=divingin>Jdeme na to</h2>
 
-<p class=f><img src=i/aoc-p.png alt=P width=110 height=106>ersistent local storage is one of the areas where native client applications have held an advantage over web applications. For native applications, the operating system typically provides an abstraction layer for storing and retrieving application-specific data like preferences or runtime state. These values may be stored in the registry, INI files, XML files, or some other place according to platform convention. If your native client application needs local storage beyond key/value pairs, you can embed your own database, invent your own file format, or any number of other solutions.
+<p class=f><img src=i/aoc-t.png alt=P width=110 height=106>rvalé lokální úložiště je jednou z oblastí, kde měly nativní klientské aplikace (desktopové) výhodu nad webovými aplikacemi. Nativním aplikacím operační systém obvykle poskytuje abstraktní vrstvu pro ukládání a načítání dat specifických pro aplikace, jako jsou nastavení nebo běhové stavy. Jejich hodnoty mohou být uloženy v registrech, INI souborech, XML souborech, nebo na jiném místě v závislosti na platformě. Pokud vaše desktopová aplikace potřebuje lokální úložiště mimo formu klíč/hodnota, můžete připojit vlastní databázi, vymyslet vlastní souborový formát, nebo využít některé jiné řešení.
 
-<p>Historically, web applications have had none of these luxuries. Cookies were invented early in the web&#8217;s history, and indeed they can be used for persistent local storage of small amounts of data. But they have three potentially dealbreaking downsides:
-
-<ul>
-<li>Cookies are included with every <abbr>HTTP</abbr> request, thereby slowing down your web application by needlessly transmitting the same data over and over
-<li>Cookies are included with every <abbr>HTTP</abbr> request, thereby sending data unencrypted over the internet (unless your entire web application is served over <abbr>SSL</abbr>)
-<li>Cookies are limited to about 4 KB of data &mdash; enough to slow down your application (see above), but not enough to be terribly useful
-</ul>
-
-<p>What we really want is
+<p>Webové aplikace v minulosti neměly takovýto luxus. Cookies byly vynalezeny na začátku webové historie a dokonce je lze použít pro trvalé lokální ukládání malého množství dat. Ale mají tři potenciálně odrazující nevýhody:
 
 <ul>
-<li>a lot of storage space
-<li>on the client
-<li>that persists beyond a page refresh
-<li>and isn&#8217;t transmitted to the server
+<li>Cookies jsou součástí každého <abbr>HTTP</abbr> požadavku, a tím zpomalují vaši webovou aplikaci zbytečným přenosem stále stejných dat
+<li>Cookies jsou součástí každého požadavku <abbr>HTTP</abbr> a tím odesílají  nezašifrovaná data přes internet (pokud není celá webová aplikace nabízena přes <abbr>SSL</abbr>)
+<li>Cookies jsou omezeny na přibližně 4 kB dat - dost na zpomalení aplikace (viz výše), ale ne natolik, aby byly dostatečně užitečné
 </ul>
 
-<p>Before <abbr>HTML5</abbr>, all attempts to achieve this were ultimately unsatisfactory in different ways.
+<p>To, co skutečně chceme je:
+
+<ul>
+<li>hodně úložného prostoru
+<li>na straně klienta
+<li>který přetrvává i po obnovení stránky
+<li>a není přenášen na server
+</ul>
+
+<p>Před <abbr>HTML5</abbr>, byly všechny pokusy o dosažení těchto cílů neuspokojivé.
 
 <p class=a>&#x2767;
 
-<h2 id=history>A Brief History of Local Storage Hacks Before HTML5</h2>
+<h2 id=history>Stručná historie hacků lokálního úložiště před HTML5</h2>
 
-<p>In the beginning, there was only Internet Explorer. Or at least, that&#8217;s what Microsoft wanted the world to think. To that end, as part of the <a href="http://en.wikipedia.org/wiki/Browser_wars#The_first_browser_war">First Great Browser Wars</a>, Microsoft invented a great many things and included them in their browser-to-end-all-browser-wars, Internet Explorer. One of these things was called <a href="http://msdn.microsoft.com/en-us/library/ms531078(v=VS.85).aspx"><abbr>DHTML</abbr> Behaviors</a>, and one of these behaviors was called <a href="http://msdn.microsoft.com/en-us/library/ms531424(VS.85).aspx">userData</a>.
+<p>Na počátku byl jen Internet Explorer. Nebo přinejmenším Microsoft chtěl, aby si to svět myslel. Za tímto účelem v rámci <a href="http://en.wikipedia.org/wiki/Browser_wars#The_first_browser_war">První Velké Války Prohlížečů</a>, Microsoft vyvinul velké množství inovací a začlenil je do Internet Eploreru, prohlížeče, který měl válku prohlížečů ukončit. Jedna z těchto inovací se jmenuje <a href="http://msdn.microsoft.com/en-us/library/ms531078(v=VS.85).aspx"><abbr>DHTML</abbr> Behaviors</a> a jeden z těchto behaviorů (způsobů chování) se jmenuje <a href="http://msdn.microsoft.com/en-us/library/ms531424(VS.85).aspx">userData</a>.
 
-<p><code>userData</code> allows web pages to store up to 64 KB of data per domain, in a hierarchical XML-based structure. (Trusted domains, such as intranet sites, can store 10 times that amount. And hey, <a href="http://en.wikiquote.org/wiki/Bill_Gates#Misattributed">640 KB ought to be enough for anybody</a>.) IE does not present any form of permissions dialog, and there is no allowance for increasing the amount of storage available.
+<p><code>userData</code> umožňují webovým stránkám uložit až 64KB na jednu doménu, v hierarchické struktuře založené na XML. (Důvěryhodné domény jako jsou intranetové stránky, umožňují uložit 10krát víc dat. A <a href="http://en.wikiquote.org/wiki/Bill_Gates#Misattributed">640 KB by mělo být dost pro každého</a>.) IE nezobrazuje žádný povolovací dialog a není potřeba povolení na zvýšení úložného místa k využití.
 
-<p>In 2002, Adobe introduced a feature in Flash 6 that gained the unfortunate and misleading name of &#8220;Flash cookies.&#8221; Within the Flash environment, the feature is properly known as <a href="http://kb2.adobe.com/cps/161/tn_16194.html">Local Shared Objects</a>. Briefly, it allows Flash objects to store up to 100 KB of data per domain. Brad Neuberg developed an early prototype of a Flash-to-JavaScript bridge called <a href="http://codinginparadise.org/weblog/2005/10/amass-ajax-massive-storage-system.html">AMASS</a> (AJAX Massive Storage System), but it was limited by some of Flash&#8217;s design quirks. By 2006, with the advent of <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/external/ExternalInterface.html">ExternalInterface</a> in Flash 8, accessing <abbr>LSO</abbr>s from JavaScript became an order of magnitude easier and faster. Brad rewrote <abbr>AMASS</abbr> and integrated it into the popular <a href=http://www.dojotoolkit.org/>Dojo Toolkit</a> under the moniker <a href="http://api.dojotoolkit.org/jsdoc/HEAD/dojox.storage.manager"><code>dojox.storage</code></a>. Flash gives each domain 100 KB of storage &#8220;for free.&#8221; Beyond that, it prompts the user for each order of magnitude increase in data storage (1 Mb, 10 Mb, and so on).
+<p>V roce 2002 Adobe představilo ve Flashi 6 funkci, která získala nešťastný a zavádějící název "Flash cookies." V prostředí Flashe je funkce spíše známá jako místní sdílené objekty (<a href="http://kb2.adobe.com/cps/161/tn_16194.html">Local Shared Objects</a>). Stručně řečeno, Flash objekt dovolil uložení až 100 KB dat na jednu doménu. Brad Neuberg vyvinul raný prototyp Flash-to-JavaScript můstku nazvaný <a href="http://codinginparadise.org/weblog/2005/10/amass-ajax-massive-storage-system.html">AMASS</a> (AJAX Massive Storage System), ale ten byl omezen některými návrhovými chybami Flashe. V roce 2006 s příchodem <a href="http://www.adobe.com/livedocs/flash/9.0/ActionScriptLangRefV3/flash/external/ExternalInterface.html">ExternalInterface</a> Flashe 8, se stal přístup k <abbr>LSO</abbr> z JavaScriptu řádově jednodušším a rychlejším. Brad přepsal <abbr>AMASS</abbr> a integroval ho do populárního <a href=http://www.dojotoolkit.org/>Dojo Toolkitu</a> pod názvem <a href="http://api.dojotoolkit.org/jsdoc/HEAD/dojox.storage.manager"><code>dojox.storage</code></a>. Flash poskytuje každé doméně 100 KB úložistě "zdarma". Kromě toho vyzve uživatele k povolení každého požadavku na zvýšení prostoru pro ukládání dat (1 MB, 10 MB atd.).
 
-<p>In 2007, Google launched <a href="http://gears.google.com/">Gears</a>, an open source browser plugin aimed at providing additional capabilities in browsers. (We&#8217;ve previously discussed Gears in the context of <a href=geolocation.html#ie>providing a geolocation <abbr>API</abbr> in Internet Explorer</a>.) Gears provides <a href="http://code.google.com/apis/gears/api_database.html">an <abbr>API</abbr> to an embedded <abbr>SQL</abbr> database</a> based on <a href="http://www.sqlite.org/">SQLite</a>. After obtaining permission from the user once, Gears can store unlimited amounts of data per domain in <abbr>SQL</abbr> database tables.
+<p>V roce 2007 Google uvedl <a href="http://gears.google.com/">Gears</a>, open source plugin pro prohlížeče zaměřený na rozšíření schopností prohlížečů. (Gears jsme již dříve zmínili v souvislosti s poskytováním <a href=geolocation.html#ie>geolokačniho <abbr>API</abbr> v Internet Exploreru</a>.) Gears poskytuje <a href="http://code.google.com/apis/gears/api_database.html"><abbr>API</abbr> pro vestavěnou <abbr>SQL</abbr> databázi</a> postavenou na <a href="http://www.sqlite.org/">SQLite</a>. Po jednom získání oprávnění od uživatele může Gears ukládat neomezené množství dat za doménu v tabulkách databáze <abbr>SQL</abbr>.
 
-<p>In the meantime, Brad Neuberg and others continued to hack away on <code>dojox.storage</code> to provide a unified interface to all these different plugins and <abbr>API</abbr>s. By 2009, <code>dojox.storage</code> could auto-detect (and provide a unified interface on top of) Adobe Flash, Gears, Adobe AIR, and an early prototype of <abbr>HTML5</abbr> storage that was only implemented in older versions of Firefox.
+<p>Mezitím Brad Neuberg a jiní pokračovali dál ve snaze vyvinout z <code>dojox.storage</code> jednotné rozhraní pro všechny různé pluginy a <abbr>API</abbr>. Od roku 2009 <code>dojox.storage</code> automaticky detekuje (a současně zastřešuje jednotným rozhraním) Adobe Flash, Gears, Adobe AIR a raný prototyp skladování <abbr>HTML5</abbr>, které bylo implementováno pouze ve starších verzích Firefoxu.
 
-<p>As you survey these solutions, a pattern emerges: all of them are either specific to a single browser, or reliant on a third-party plugin. Despite heroic efforts to paper over the differences (in <code>dojox.storage</code>), they all expose radically different interfaces, have different storage limitations, and present different user experiences. So this is the problem that <abbr>HTML5</abbr> set out to solve: to provide a standardized <abbr>API</abbr>, implemented natively and consistently in multiple browsers, without having to rely on third-party plugins.
+<p>Pokud jste prozkumali tato řešení, objevíte podobnost: všechna řešení jsou buď specifická pro jediný prohlížeč, nebo závislá na pluginu třetí strany. Navzdory heroickému úsilí překlenout rozdíly (v <code>dojox.storage</code>), všechny vystavují radikálně odlišné rozhraní, mají různé skladovací omezení a představují různé uživatelské zkušenosti. To je tedy ten problém a <abbr>HTML5</abbr> ustanovuje řešení: zajistit standardizované <abbr>API</abbr> implementované nativně a důsledně ve více prohlížečích, aniž byste museli spoléhat na pluginy třetích stran.
 
 <p class=a>&#x2767;
 
-<h2 id=localstorage>Introducing HTML5 Storage</h2>
+<h2 id=localstorage>Představujeme HTML5 úložiště</h2>
 
-<p>What I will refer to as &#8220;<abbr>HTML5</abbr> Storage&#8221; is a specification named <a href="http://dev.w3.org/html5/webstorage/">Web Storage</a>, which was at one time part of the <abbr>HTML5</abbr> specification proper, but was split out into its own specification for uninteresting political reasons. Certain browser vendors also refer to it as &#8220;Local Storage&#8221; or &#8220;<abbr>DOM</abbr> Storage.&#8221; The naming situation is made even more complicated by some related, similarly-named, emerging standards that I&#8217;ll discuss later in this chapter.
+<p>To, co jsem si označil jako &#8222;<abbr>HTML5</abbr> Storage&#8220;, je specifikací pojmenované <a href="http://dev.w3.org/html5/webstorage/">Webové úložiště</a>, které bylo součástí základní <abbr>HTML5</abbr> specifikace, ale bylo vyčleněno do vlastní specifikace z nezajímavých politických důvodů. Někteří výrobci prohlížečů na něj také odkazují jako na &#8222;Local Storage&#8220; nebo &#8222;<abbr>DOM</abbr> Storage.&#8220; Situace s pojmenováváním se více komplikuje se souvisejícími podobně pojmenovanými nově vznikajícími standardy, které zmíním později v této kapitole.
 
-<p>So what is <abbr>HTML5</abbr> Storage? Simply put, it&#8217;s a way for web pages to store named key/value pairs locally, within the client web browser. Like cookies, this data persists even after you navigate away from the web site, close your browser tab, exit your browser, or what have you. Unlike cookies, this data is never transmitted to the remote web server (unless you go out of your way to send it manually). Unlike <a href=#history>all previous attempts</a> at providing persistent local storage, it is implemented natively in web browsers, so it is available even when third-party browser plugins are not.
+<p>Takže, co je <abbr>HTML5</abbr> Storage? Jednoduše řečeno se jedná o způsob, jakým mohou webové stránky lokálně ukládat páry klíč/hodnota uvnitř webového prohlížeče. Stejně jako cookies i tato data přetrvávají po opuštění webové stránky, uzavření panelu prohlížeče, ukončení prohlížeče a tak podobně. Na rozdíl od cookies nejsou tato data nikdy přenášena na vzdálený server (pokud je tam nepošlete vy sami). Na rozdíl od všech <a href=#history>předchozích pokusů</a> o zajištění trvalého místního úložiště, je implementováno nativně ve webových prohlížečích, takže je k dispozici, i když nepoužíváte v prohlížeči pluginy třetích stran.
 
-<p>Which browsers? Well, the latest version of pretty much every browser supports <abbr>HTML5</abbr> Storage&hellip; even Internet Explorer!
+<p>O které prohlížeče se jedná? <abbr>HTML5</abbr> Storage podporuje poslední verze skoro každého prohlížeče&hellip; dokonce i Internet Explorer!
 
 <table class=bc>
-<caption><abbr>HTML5</abbr> Storage support</caption>
+<caption><abbr>HTML5</abbr> Storage podporují</caption>
 <thead>
 <tr><th title="Internet Explorer">IE<th title="Mozilla Firefox">Firefox<th title="Apple Safari">Safari<th title="Google Chrome">Chrome<th>Opera<th>iPhone<th>Android
 <tbody>
 <tr><td>8.0+<td>3.5+<td>4.0+<td>4.0+<td>10.5+<td>2.0+<td>2.0+
 </table>
 
-<p>From your JavaScript code, you&#8217;ll access <abbr>HTML5</abbr> Storage through the <code>localStorage</code> object on the global <code>window</code> object. Before you can use it, you should <a href=detect.html#storage>detect whether the browser supports it</a>.
+<p>Z vašeho javascriptového kódu máte přístup do <abbr>HTML5</abbr> Storage přes objekt <code>localStorage</code> v objektu global <code>window</code>. Dříve než jej můžete začít používat, měli byste si <a href=detect.html#storage>ověřit, zda ho prohlížeč podporuje</a>.
 
-<p class="legend top" style="padding-left:6em"><span class=arrow>&#x21b6;</span> check for <abbr>HTML5</abbr> Storage
+<p class="legend top" style="padding-left:6em"><span class=arrow>&#x21b6;</span> kontrola podpory <abbr>HTML5</abbr> Storage
 <pre><code>function supports_html5_storage() {
   try {
     return 'localStorage' in window && window['localStorage'] !== null;
@@ -81,63 +81,63 @@ body{counter-reset:h1 7}
   }
 }</code></pre>
 
-<p>Instead of writing this function yourself, you can use <a href=detect.html#modernizr>Modernizr</a> to detect support for <abbr>HTML5</abbr> Storage.
+<p>Než aby jste tuto funkci psali sami, můžete k zjištění podpory <abbr>HTML5</abbr> Storage použít <a href=detect.html#modernizr>Modernizr</a>.
 
 <pre><code>if (<mark>Modernizr.localstorage</mark>) {
-  // window.localStorage is available!
+  // window.localStorage je k dispozici!
 } else {
-  // no native support for HTML5 storage :(
-  // maybe try dojox.storage or a third-party solution
+  // žádná nativní podpora pro HTML5 storage :(
+  // možná zkuste dojox.storage nebo řešení třetích stran
 }</code></pre>
 
 <p class=a>&#x2767;
 
-<h2 id=methods>Using HTML5 Storage</h2>
+<h2 id=methods>Používání HTML5 Storage</h2>
 
-<p><abbr>HTML5</abbr> Storage is based on named key/value pairs. You store data based on a named key, then you can retrieve that data with the same key. The named key is a string. The data can be any type supported by JavaScript, including strings, Booleans, integers, or floats. However, the data is actually stored as a string. If you are storing and retrieving anything other than strings, you will need to use functions like <code>parseInt()</code> or <code>parseFloat()</code> to coerce your retrieved data into the expected JavaScript datatype.
+<p><abbr>HTML5</abbr> Storage je založen na párech klíč/hodnota. Uložíte-li data s pojmenovaným klíčem, pak můžete tato data se stejným klíčem získat. Pojmenovaný klíč je řetězec. Data mohou být jakéhokoliv typu, který JavaScript podporuje, včetně stringů, logických hodnot, celých čísel, nebo desetinných čísel. Nicméně data se vždy uloží jako řetězec. Pokud ukládáte nebo načítáte cokoliv jiného než řetězce, budete muset použít funkce jako <code>parseInt()</code> nebo <code>parseFloat()</code> k převedení načítaných dat do očekávaného JavaScriptového datového typu.
 
 <pre><code>interface Storage {
   getter any getItem(in DOMString key);
   setter creator void setItem(in DOMString key, in any data);
 };</code></pre>
 
-<p>Calling <code>setItem()</code> with a named key that already exists will silently overwrite the previous value. Calling <code>getItem()</code> with a non-existent key will return <code>null</code> rather than throw an exception.
+<p>Volání <code>setItem()</code> s pojmenovaným klíčem, který již existuje, potichu přepíše přecházející uloženou hodnotu. Volání <code>getItem()</code> s neexistujícím klíčem vrátí <code>null</code> spíše než výjimku.
 
-<p>Like other JavaScript objects, you can treat the <code>localStorage</code> object as an associative array. Instead of using the <code>getItem()</code> and <code>setItem()</code> methods, you can simply use square brackets. For example, this snippet of code:
+<p>Stejně jako ostatní JavaScriptové objekty, můžete považovat <code>localStorage</code> objekt jako asociativní pole. Namísto použití metody <code>getItem()</code> a <code>setItem()</code>, můžete jednoduše použít hranaté závorky. Například, tento kousek kódu:
 
 <pre><code>var foo = localStorage.<mark>getItem</mark>("bar");
 // ...
 localStorage.<mark>setItem</mark>("bar", foo);</code></pre>
 
-<p>&hellip;could be rewritten to use square bracket syntax instead:
+<p>&hellip;může být přepsán s použítím syntaxe hranatých závorek:
 
 <pre><code>var foo = localStorage<mark>["bar"]</mark>;
 // ...
 localStorage<mark>["bar"]</mark> = foo;</code></pre>
 
-<p>There are also methods for removing the value for a given named key, and clearing the entire storage area (that is, deleting all the keys and values at once).
+<p>Existují rovněž metody pro odstranění hodnoty daného pojmenovaného klíče, a vyčištění celého úložného prostoru (což je odstranění všech klíčů a hodnot najednou).
 
 <pre><code>interface Storage {
   deleter void removeItem(in DOMString key);
   void clear();
 };</code></pre>
 
-<p>Calling <code>removeItem()</code> with a non-existent key will do nothing.
+<p>Volání <code>removeItem()</code> s neexistujícím klíčem neprovede nic.
 
-<p>Finally, there is a property to get the total number of values in the storage area, and to iterate through all of the keys by index (to get the name of each key).
+<p>Nakonec je zde vlastnost k získání celkového počtu hodnot v úložišti a k iteraci přes všechny klíče podle indexu (k získání názvu každého klíče).
 
 <pre><code>interface Storage {
   readonly attribute unsigned long length;
   getter DOMString key(in unsigned long index);
 };</code></pre>
 
-<p>If you call <code>key()</code> with an index that is not between 0&ndash;(<code>length</code>-1), the function will return <code>null</code>.
+<p>Pokud zavoláte <code>key()</code> s indexem mezi 0&ndash;(<code>délka</code>-1), tak funkce vrátí <code>null</code>.
 
-<h3 id=storage-event>Tracking Changes to the HTML5 Storage Area</h3>
+<h3 id=storage-event>Sledování změn v HTML5 Storage Area</h3>
 
-<p>If you want to keep track programmatically of when the storage area changes, you can trap the <code>storage</code> event. The <code>storage</code> event is fired on the <code>window</code> object whenever <code>setItem()</code>, <code>removeItem()</code>, or <code>clear()</code> is called <em>and actually changes something</em>. For example, if you set an item to its existing value or call <code>clear()</code> when there are no named keys, the <code>storage</code> event will not fire, because nothing actually changed in the storage area.
+<p>Pokud chcete programově sledovat změny v prostoru úložiště, můžete odchytávat události <code>storage</code>. Události <code>storage</code> jsou vyhozeny z <code>window</code> objektu kdykoliv zavoláme <code>setItem()</code>, <code>removeItem()</code>, nebo <code>clear()</code> <em>a skutečně něco změníme</em>. Například, když nastavíte položku na její současnou hodnotu nebo zavoláte <code>clear()</code> pokud v úložišti nejsou žádné pojmenované klíče, tak <code>storage</code> nevyhodí událost, protože se ve skutečnosti nic v úložišti nezměnilo.
 
-<p>The <code>storage</code> event is supported everywhere the <code>localStorage</code> object is supported, which includes Internet Explorer 8. IE 8 does not support the W3C standard <code>addEventListener</code> (although that will finally be added in IE 9). Therefore, to hook the <code>storage</code> event, you&#8217;ll need to check which event mechanism the browser supports. (If you&#8217;ve done this before with other events, you can skip to the end of this section. Trapping the <code>storage</code> event works the same as every other event you&#8217;ve ever trapped. If you prefer to use jQuery or some other JavaScript library to register your event handlers, you can do that with the <code>storage</code> event, too.)
+<p><code>Storage</code> událost je podporována všude, kde je podporován objekt <code>localStorage</code>, což zahrnuje i Internet Explorer 8. IE 8 nepodporuje W3C standard <code>addEventListener</code> (i když nakonec bylo přidáno v IE 9). Proto k zachycení událostí <code>storage</code>, musíte zkontrolovat který mechanismus událostí prohlížeč podporuje. (Pokud jste to už dříve dělali s jinými událostmi, můžete přejít na konec této části. Odchytávání událostí <code>storage</code> funguje stejně jako každá jiná událost, kterou jste dříve odchytávali. Pokud upředňostňujete užití jQuery nebo nějaké jiné javascriptové knihovny k obsluze událostí, můžete to s událostmi  <code>storage</code> dělat stejně.)
 
 <pre><code>if (window.addEventListener) {
   window.addEventListener("storage", handle_storage, false);
@@ -145,44 +145,44 @@ localStorage<mark>["bar"]</mark> = foo;</code></pre>
   window.attachEvent("onstorage", handle_storage);
 };</code></pre>
 
-<p>The <code>handle_storage</code> callback function will be called with a <code>StorageEvent</code> object, except in Internet Explorer where the event object is stored in <code>window.event</code>.
+<p>Zpětné volání <code>Handle_storage</code> funkce bude voláno s <code>StorageEvent</code> objektem, vyjímkou je Internet Explorer kde jsou události objektu uloženy ve <code>window.event</code>.
 
 <pre><code>function handle_storage(e) {
   if (!e) { e = window.event; }
 }</code></pre>
 
-<p>At this point, the variable <code>e</code> will be a <code>StorageEvent</code> object, which has the following useful properties.
+<p>V tomto bodě bude proměnná <code>e</code> objektem <code>StorageEvent</code>, což má tyto užitečné vlastnosti.
 
 <table class=st>
-<caption>StorageEvent Object</caption>
+<caption>Objekt StorageEvent</caption>
 <thead>
-<tr class=ho><th>Property<th>Type<th>Description
+<tr class=ho><th>Vlastnost<th>Typ<th>Popis
 <tbody>
-<tr class=zebra><th><code>key</code><td>string<td>the named key that was added, removed, or modified
-<tr><th><code>oldValue</code><td>any<td>the previous value (now overwritten), or <code>null</code> if a new item was added
-<tr class=zebra><th><code>newValue</code><td>any<td>the new value, or <code>null</code> if an item was removed
-<tr><th><code>url</code><sup>*</sup><td>string<td>the page which called a method that triggered this change
+<tr class=zebra><th><code>key</code><td>string<td>pojmenovaný klíč, který byl přidán, odstraněn nebo změněn
+<tr><th><code>oldValue</code><td>jakýkoliv<td>předchozí hodnota (nyní přepsaná), nebo <code>null</code> pokud byla přidána nová položka
+<tr class=zebra><th><code>newValue</code><td>jakýkoliv<td>nová hodnota, nebo <code>null</code> pokud byla položka odstraněna
+<tr><th><code>url</code><sup>*</sup><td>string<td>stránka, kterou volala metoda, kterou spouští tato změna
 <tfoot>
-<tr><td colspan=3>* Note: the <code>url</code> property was originally called <code>uri</code>. Some browsers shipped with that property before the specification changed. For maximum compatibility, you should check whether the <code>url</code> property exists, and if not, check for the <code>uri</code> property instead.
+<tr><td colspan=3>* Poznámka: <code>url</code> vlastnost se původně jmenovala <code>uri</code>. Některé prohlížeče byly vydány s touto vlastností před změnou specifikace. Pro maximální kompatibilitu byste měli zkontrolovat zda <code>url</code> vlastnost podporuje a pokud ne, zkontrolujte podporu vlastnosti <code>uri</code>.
 </table>
 
-<p>The <code>storage</code> event is not cancelable. From within the <code>handle_storage</code> callback function, there is no way to stop the change from occurring. It&#8217;s simply a way for the browser to tell you, &#8220;hey, this just happened. There&#8217;s nothing you can do about it now; I just wanted to let you know.&#8221;
+<p><code>Storage</code> akci nelze zrušit (not cancelable). V rámci zpetného volání funkce <code>handle_storage</code> neexistuje žádný způsob, jak zastavit změnu vyvolání. Je to prostě způsob jak prohlížeč říká &#8222;Hej, to se právě stalo. Neexistuje nic, co bys mohl udělat; Já jen chtěl abys to věděl.&#8220;
 
-<h3 id=limitations>Limitations in Current Browsers</h3>
+<h3 id=limitations>Omezení v současných prohlížečích</h3>
 
-<p>In talking about <a href=#history>the history of local storage hacks</a> using third-party plugins, I made a point of mentioning the limitations of each technique, such as storage limits. I just realized that I haven&#8217;t mentioned anything about the limitations of the now-standardized <abbr>HTML5</abbr> Storage. I&#8217;ll give you the answers first, then explain them. The answers, in order of importance, are &#8220;5 megabytes,&#8221; &#8220;<code>QUOTA_EXCEEDED_ERR</code>,&#8221; and &#8220;no.&#8221;
+<p>Dříve, v části <a href=#history>o historii hacků místního úložiště</a> pomocí pluginů třetích stran, jsem se zmínil o omezeních jednotlivých technik, jako například omezení velikosti. Právě jsem si uvědomil, že jsem nezmínil nic o omezeních právě standardizovaného <abbr>HTML5</abbr> Storage. Nejdříve vám dám odpovědi a potom je vysvětlím. Odpovědi jsou, v pořadí podle důležitosti, &#8222;5 MB,&#8220; &#8222;<code>QUOTA_EXCEEDED_ERR</code>,&#8220; a &#8222;ne.&#8220;
 
-<p>&#8220;5 megabytes&#8221; is how much storage space each <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin-0>origin</a> gets by default. This is surprisingly consistent across browsers, although it is phrased as no more than a suggestion in the <abbr>HTML5</abbr> Storage specification. One thing to keep in mind is that you&#8217;re storing strings, not data in its original format. If you&#8217;re storing a lot of integers or floats, the difference in representation can really add up. Each digit in that float is being stored as a character, not in the usual representation of a floating point number.
+<p>&#8222;5 MB&#8220; je, úložný prostor, který dostane každý <a href=http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#origin-0>origin</a> ve výchozím nastavení. Překvapivě je to stejné napříč prohlížeči, ačkoli je to ve specifikaci <abbr>HTML5</abbr> Storage formulováno jen jako návrh. Jednu věc je důležité si zapamatovat, a to že ukládáte řetězce a ne data v původním formátu. Pokud ukládáte hodně celých nebo desetinných čísel, může být rozdíl v prezentaci skutečně velký. Každá číslice v desetinného čísla je uložena jako znak, ne jako běžná prezentace desetinného čísla.
 
-<p>&#8220;<code>QUOTA_EXCEEDED_ERR</code>&#8221; is the exception that will get thrown if you exceed your storage quota of 5 megabytes. &#8220;No&#8221; is the answer to the next obvious question, &#8220;Can I ask the user for more storage space?&#8221; At time of writing (February 2011), no browser supports any mechanism for web developers to request more storage space. Some browsers (<a href=http://dev.opera.com/articles/view/web-storage/>like Opera</a>) allow the user to control each site&#8217;s storage quota, but it is purely a user-initiated action, not something that you as a web developer can build into your web application.
+<p>&#8222;<code>QUOTA_EXCEEDED_ERR</code>&#8220; je výjimka, kterou dostanete, pokud překročíte kapacitu 5 MB úložného prostoru. &#8222;Ne&#8220; je odpověď  na další zřejmou otázku, &#8222;Mohu se zeptat uživatele na přidělení většího místa?&#8220; V době psaní (Únor 2011) žádný prohlížeč nepodporuje jakýkoliv mechanismus pro webové vyvojáře, který by umožnil dotazání se na zvětšení uložného prostoru. Některé prohlížeče (<a href=http://dev.opera.com/articles/view/web-storage/>například Opera</a>) umožňují uživateli ovládat jak velké uložiště může každá stránka využívat, ale je to čistě uživatelem iniciovaná věc, ne něco co byste vy jako webový vývojář mohli vestavět do aplikace.
 
 <p class=a>&#x2767;
 
-<h2 id=halma>HTML5 Storage in Action</h2>
+<h2 id=halma>HTML5 Storage v akci</h2>
 
-<p>Let&#8217;s see <abbr>HTML5</abbr> Storage in action. Recall <a href=canvas.html#halma>the Halma game we constructed in the canvas chapter</a>. There&#8217;s a small problem with the game: if you close the browser window mid-game, you&#8217;ll lose your progress. But with <abbr>HTML5</abbr> Storage, we can save the progress locally, within the browser itself. Here is <a href=examples/localstorage-halma.html>a live demonstration</a>. Make a few moves, then close the browser tab, then re-open it. If your browser supports <abbr>HTML5</abbr> Storage, the demonstration page should magically remember your exact position within the game, including the number of moves you&#8217;ve made, the position of each of the pieces on the board, and even whether a particular piece is selected.
+<p>Podívejme se na <abbr>HTML5</abbr> Storage v akci. Připomeňme <a href=canvas.html#halma>si hru Halma kterou jsme vytvořili v kapitole o canvasu</a>. S hrou je však malý problém: pokud zavřete okno prohlížeče uprostřed hry, ztratíte svůj postup. Ale s <abbr>HTML5</abbr> Storage můžeme rezehranou hru uložit lokálně v rámci samotného prohlížeče. Zde je <a href=examples/localstorage-halma.html>živá ukázka</a>. Zahrajte několik tahů, zavřete kartu prohlížeče a znovu ji otevřete. Pokud váš prohlížeč podporuje <abbr>HTML5</abbr> Storage, ukázková stránka si jako kouzlem zapamatuje stav vaší hry včetně počtu tahů, které jste táhli pozice každého kamene na desce a dokonce i to zda byl některý kámen vybrán.
 
-<p>How does it work? Every time a change occurs within the game, we call this function:
+<p>Jak to funguje? Pokaždé, když dojde ke změně ve hře, zavoláme tuto funkci:
 
 <pre><code>function saveGameState() {
     if (!supportsLocalStorage()) { return false; }
@@ -197,9 +197,9 @@ localStorage<mark>["bar"]</mark> = foo;</code></pre>
     return true;
 }</code></pre>
 
-<p>As you can see, it uses the <code>localStorage</code> object to save whether there is a game in progress (<code>gGameInProgress</code>, a Boolean). If so, it iterates through the pieces (<code>gPieces</code>, a JavaScript <code>Array</code>) and saves the row and column number of each piece. Then it saves some additional game state, including which piece is selected (<code>gSelectedPieceIndex</code>, an integer), whether the piece is in the middle of a potentially long series of hops (<code>gSelectedPieceHasMoved</code>, a Boolean), and the total number of moves made so far (<code>gMoveCount</code>, an integer).
+<p>Jak můžete vidět, pokud je rozehraná hra využíváme k uložení objectu <code>localStorage</code> (<code>gGameInProgress</code>, logická hodnota). Pokud ano, projde pieces (<code>gPieces</code>, JavaScript <code>Array</code>) uloží čísla řádku a sloupce pro každého pieces. Poté uloží několik dalších stavů hry, včetně toho, který pieces je vybrán (<code>gSelectedPieceIndex</code>, celé číslo), zda je piece uprostřed potencionálně dlouhé řady skoků (<code>gSelectedPieceHasMoved</code>, a Boolean), a celkový počet odehraných tahů (<code>gMoveCount</code>, celé číslo).
 
-<p>On page load, instead of automatically calling a <code>newGame()</code> function that would reset these variables to hard-coded values, we call a <code>resumeGame()</code> function instead. Using <abbr>HTML5</abbr> Storage, the <code>resumeGame()</code> function checks whether a state about a game-in-progress is stored locally. If so, it restores those values using the <code>localStorage</code> object.
+<p>Při načtení stránky místo automatického volání funkce <code>newGame()</code>, která by resetovala proměnné na startovní hodnoty, zavoláme funkci <code>resumeGame()</code>. Pomocí <abbr>HTML5</abbr> Storage funkce <code>resumeGame()</code> zkontroluje, zda je lokálně uložen stav o rozehrané hře. Pokud ano, obnoví tyto hodnoty pomocí objektu <code>localStorage</code>.
 
 <pre><code>function resumeGame() {
     if (!supportsLocalStorage()) { return false; }
@@ -219,29 +219,29 @@ localStorage<mark>["bar"]</mark> = foo;</code></pre>
     return true;
 }</code></pre>
 
-<p>The most important part of this function is the caveat that I mentioned earlier in this chapter, which I&#8217;ll repeat here: <em>Data is stored as strings. If you are storing something other than a string, you&#8217;ll need to coerce it yourself when you retrieve it.</em> For example, the flag for whether there is a game in progress (<code>gGameInProgress</code>) is a Boolean. In the <code>saveGameState()</code> function, we just stored it and didn&#8217;t worry about the datatype:
+<p>Nejdůležitější částí této funkce je varování, které jsem zmiňoval dříve v této kapitole, které zde zopakuji: <em>Data jsou uložena jako řetězce. Pokud ukládáte něco jiného než řetězce, budete je muset změnit sami při načítání.</em> Například příznak, zda je hra rozehraná (<code>gGameInProgress</code>), je logická hodnota. Ve funkci <code>saveGameState()</code> jsme jej pouze uložili a nedělali jsme si hlavu s datatypem:
 
 <pre><code>localStorage["halma.game.in.progress"] = <mark>gGameInProgress</mark>;</code></pre>
 
-<p>But in the <code>resumeGame()</code> function, we need to treat the value we got from the local storage area as a string and manually construct the proper Boolean value ourselves:
+<p>Ale ve funkci <code>resumeGame()</code> je třeba považovat hodnotu, kterou jsme dostali od místního úložiště jako řetězec, a ručně ji přetvořit na správnou logickou hodnotu sami:
 
 <pre><code>gGameInProgress = (localStorage["halma.game.in.progress"] <mark>== "true"</mark>);</code></pre>
 
-<p>Similarly, the number of moves is stored in <code>gMoveCount</code> as an integer. In the <code>saveGameState()</code> function, we just stored it:
+<p>Stejně tak je počet tahů uložený v <code>gMoveCount</code> jako celé číslo. Ve funkci <code>saveGameState()</code> jsme jej prostě uložily:
 
 <pre><code>localStorage["halma.movecount"] = <mark>gMoveCount</mark>;</code></pre>
 
-<p>But in the <code>resumeGame()</code> function, we need to coerce the value to an integer, using the <code>parseInt()</code> function built into JavaScript:
+<p>Ale ve funkci <code>resumeGame()</code> musíme změnit hodnotu na celé číslo pomocí funkce <code>parseInt()</code> vestavěné přímo v JavaScriptu:
 
 <pre><code>gMoveCount = <mark>parseInt</mark>(localStorage["halma.movecount"]);</code></pre>
 
 <p class=a>&#x2767;
 
-<h2 id=future>Beyond Named Key-Value Pairs: Competing Visions</h2>
+<h2 id=future>Za hranicemi párů klíč - hodnota: soupeření vizí</h2>
 
-<p>While <a href=#history>the past is littered with hacks and workarounds</a>, the present condition of <abbr>HTML5</abbr> Storage is surprisingly rosy. A new <abbr>API</abbr> has been standardized and implemented across all major browsers, platforms, and devices. As a web developer, that&#8217;s just not something you see every day, is it? But there is more to life than &#8220;5 megabytes of named key/value pairs,&#8221; and the future of persistent local storage is&hellip; how shall I put it&hellip; well, there are competing visions.
+<p>Zatímco <a href=#history>minulost je plná hacků a zástupných řešení</a>, současný stav <abbr>HTML5</abbr> Storage je překvapivě růžový. Nové <abbr>API</abbr> je standardizováno a implementováno ve všech hlavních prohlížečích, platformách a zařízeních. Pro webového vývojáře to je prostě něco, co není vidět každý den, že? Ale existuje něco důležitějšího než &#8222;5 megabajtů párů klíč/hodnota,&#8220; a budoucnost trvalého lokálního úložiště je&hellip; jak bych to&hellip; no, existuje více soupeřících vizí.
 
-<p>One vision is an acronym that you probably know already: <abbr>SQL</abbr>. In 2007, Google launched <a href=http://gears.google.com/>Gears</a>, an open source cross-browser plugin which included an embedded database based on <a href=http://www.sqlite.org/>SQLite</a>. This early prototype later influenced the creation of the <a href=http://dev.w3.org/html5/webdatabase/>Web SQL Database</a> specification. Web SQL Database (formerly known as &#8220;WebDB&#8221;) provides a thin wrapper around a <abbr>SQL</abbr> database, allowing you to do things like this from JavaScript:
+<p>Jednou z vizí je zkratka, kterou už asi znáte : <abbr>SQL</abbr>. V roce 2007 Google spustil <a href=http://gears.google.com/>Gears</a>, open source plugin pro většinu prohlížečů, který zahrnoval vestavěnou databázi založenou na <a href=http://www.sqlite.org/>SQLite</a>. Tento časný prototyp měl později vliv na vytvoření specifikace <a href=http://dev.w3.org/html5/webdatabase/>Web SQL Database</a>. Web SQL Database (dříve známý jako &#8222;WebDB&#8220;) poskytuje tenký obal kolem <abbr>SQL</abbr> databáze, která vám umožní dělat věci jako je tato z JavaScriptu:
 
 <p class="legend top" style="padding-left:3em"><span class=arrow>&#x21b6;</span> actual working code in 4 browsers
 <pre><code><mark>openDatabase</mark>('documents', '1.0', 'Local document storage', 5*1024*1024, function (db) {
@@ -250,90 +250,90 @@ localStorage<mark>["bar"]</mark> = foo;</code></pre>
   }, error);
 });</code></pre>
 
-<p>As you can see, most of the action resides in the string you pass to the <code>executeSql</code> method. This string can be any supported <abbr>SQL</abbr> statement, including <code>SELECT</code>, <code>UPDATE</code>, <code>INSERT</code>, and <code>DELETE</code> statements. It&#8217;s just like backend database programming, except you&#8217;re doing it from JavaScript! Oh joy!
+<p>Jak vidíte většina akce spočívá v řetězci, který předáte metodě <code>executeSql</code>. Tento řetězec může být jakýkoliv podporovaný <abbr>SQL</abbr>, včetně <code>SELECT</code>, <code>UPDATE</code>, <code>INSERT</code> a <code>DELETE</code>. Je to jako klasické programování databází, kromě toho, že to děláte z JavaScriptu! Jaká radost!
 
-<p>The Web SQL Database specification has been implemented by four browsers and platforms.
+<p>Specifikace Web SQL Database byla implementována do čtyř prohlížečů a platforem.
 
 <table class=bc>
-<caption>Web SQL Database support</caption>
+<caption>Podpora Web SQL Database</caption>
 <thead>
 <tr><th title="Internet Explorer">IE<th title="Mozilla Firefox">Firefox<th title="Apple Safari">Safari<th title="Google Chrome">Chrome<th>Opera<th>iPhone<th>Android
 <tbody>
 <tr><td>&middot;<td>&middot;<td>4.0+<td>4.0+<td>10.5+<td>3.0+<td>2.0+
 </table>
 
-<p>Of course, if you&#8217;ve used more than one database product in your life, you are aware that &#8220;<abbr>SQL</abbr>&#8221; is more of a marketing term than a hard-and-fast standard. (Some would say the same of &#8220;HTML5,&#8221; but never mind that.) Sure, there is an actual <abbr>SQL</abbr> specification (it&#8217;s called <a href="http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt">SQL-92</a>), but there is no database server in the world that conforms to that and only that specification. There&#8217;s Oracle&#8217;s <abbr>SQL</abbr>, Microsoft&#8217;s <abbr>SQL</abbr>, MySQL&#8217;s <abbr>SQL</abbr>, PostgreSQL&#8217;s <abbr>SQL</abbr>, and SQLite&#8217;s <abbr>SQL</abbr>. Indeed, each of these products adds new <abbr>SQL</abbr> features over time, so even saying &#8220;SQLite&#8217;s <abbr>SQL</abbr>&#8221; is not sufficient to pin down exactly what you&#8217;re talking about. You need to say &#8220;the version of <abbr>SQL</abbr> that shipped with SQLite version X.Y.Z.&#8221;
+<p>Samozřejmě, pokud jste v životě použili více než jeden databázový produkt, jste si vědomi, že <abbr>SQL</abbr> je víc termín marketingu než tvrdého-a-rychlého standardu. (Někdo by mohl říct totéž o &#8222;HTML5,&#8220; ale to nevadí.) Jistě, je zde aktuální specifikace <abbr>SQL</abbr> (jmenuje se <a href="http://www.contrib.andrew.cmu.edu/~shadow/sql/sql1992.txt">SQL-92</a>), ale na světě není databázový server, který odpovídá této a pouze této specifikaci. Máme Oracle <abbr>SQL</abbr>, Microsoft <abbr>SQL</abbr>, MySQL <abbr>SQL</abbr>, PostgreSQL <abbr>SQL</abbr>, a SQLite <abbr>SQL</abbr>. Opravdu, každý z těchto produktů v průběhu doby přidával nové <abbr>SQL</abbr> funkce, takže říkat &#8222;SQLite <abbr>SQL</abbr>&#8220;, nestačí abychom mohli upřesnily o čem mluvíme. Musíte říct: &#8222;verze <abbr>SQL</abbr> dodaná s SQLite verze X.Y.Z.&#8220;
 
-<p>All of which brings us to the following disclaimer, currently residing at the top of the Web SQL Database specification:
+<p>Toto nás přivádí k následujícímu prohlášení, v současné době uvedenému v horní části specifikace Web SQL Database:
 
 <blockquote>
-<p>This specification has reached an impasse: all interested implementors have used the same SQL backend (Sqlite), but we need multiple independent implementations to proceed along a standardisation path. Until another implementor is interested in implementing this spec, the description of the SQL dialect has been left as simply a reference to Sqlite, which isn't acceptable for a standard.
+<p>Tato specifikace se dostala do slepé uličky: všichni zaiteresovaní implementátoři použili stejný SQL (Sqlite), ale je potřeba více nezávislých implementací, aby bylo možno pokračovat ve standardizační cestě. Dokud jiný implementátor nebude mít zájem implemnentovat tuto specifikaci, je popis dialektu SQL ponechán jednoduše jen jako odkaz na SQLite, což pro standard není přijatelné.
 </blockquote>
 
-<p>It is against this backdrop that I will introduce you to another competing vision for advanced, persistent, local storage for web applications: <a href=http://dev.w3.org/2006/webapi/IndexedDB/>the Indexed Database <abbr>API</abbr></a>, formerly known as &#8220;WebSimpleDB,&#8221; now affectionately known as &#8220;IndexedDB.&#8221;
+<p>Vzhledem k těmto okolnostem vám přestavím další vizi pro pokročilé trvalé lokalní úložiště pro webové aplikace: <a href=http://dev.w3.org/2006/webapi/IndexedDB/><abbr>API</abbr> Indexované Databáze</a>, dříve známé jako &#8222;WebSimpleDB,&#8220; nyní důvěrně známé jako &#8222;IndexedDB.&#8220;
 
-<p>The Indexed Database <abbr>API</abbr> exposes what&#8217;s called an <em>object store</em>. An object store shares many concepts with a <abbr>SQL</abbr> database. There are &#8220;databases&#8221; with &#8220;records,&#8221; and each record has a set number of &#8220;fields.&#8221; Each field has a specific datatype, which is defined when the database is created. You can select a subset of records, then enumerate them with a &#8220;cursor.&#8221; Changes to the object store are handled within &#8220;transactions.&#8221;
+<p><abbr>API</abbr> Indexované Databáze odhalují to co se nazývá <em>object store</em>. Object store sdílí mnoho konceptů s databází <abbr>SQL</abbr>. Jsou zde &#8222;databáze&#8220; se &#8222;záznamy,&#8220; a každý záznam má stanovený počet &#8222;polí.&#8220; Každé pole má specifikovaný datový typ, který je definován při vytváření databáze. Můžete si vybrat podmnožinu záznamů, poté je vypočítávat &#8222;kurzorem.&#8220; Změny v  object store jsou řešeny v rámci &#8222;operace.&#8220;
 
-<p>If you&#8217;ve done any <abbr>SQL</abbr> database programming, these terms probably sound familiar. The primary difference is that the object store has no structured query language. You don&#8217;t construct a statement like <code>"SELECT * from USERS where ACTIVE = 'Y'"</code>. Instead, you use methods provided by the object store to open a cursor on the database named &#8220;<code>USERS</code>,&#8221; enumerate through the records, filter out records for inactive users, and use accessor methods to get the values of each field in the remaining records. <a href="http://hacks.mozilla.org/2010/06/comparing-indexeddb-and-webdatabase/">An early walk-through of IndexedDB</a> is a good tutorial of how IndexedDB works, giving side-by-side comparisons of IndexedDB and Web SQL Database.
+<p>Pokud jste někdy dělali databázové <abbr>SQL</abbr> programování, tak vám tyto termíny pravděpodobně znějí povědomě. Hlavní rozdíl je v tom, že object store nemá žádný strukturovaný dotazovací jayzk. Nevytváříte dotazy typu <code>"SELECT * from USERS where ACTIVE = 'Y'"</code>. Místo toho můžete použít metodu uvedenou v object store otevření kurzoru nad databází s názvem &#8222;<code>USERS</code>,&#8220; projít skrz záznamy, vyfiltrovat pryč záznamy s neaktivními uživateli a použít přístupovou metodu k získání hodnot každého ze zbývajích záznamů. <a href="http://hacks.mozilla.org/2010/06/comparing-indexeddb-and-webdatabase/">Dřívější průvodce po IndexedDB</a> je dobrý tutorial o fungování IndexedDB , porovnávající IndexedDB a Web SQL Database.
 
-<p>At time of writing, IndexedDB has only been implemented in <a href=https://developer.mozilla.org/en/Firefox_4_for_developers>a beta version of Firefox 4</a>. (By contrast, Mozilla has stated that <a href="http://hacks.mozilla.org/2010/06/beyond-html5-database-apis-and-the-road-to-indexeddb/">they will never implement Web SQL Database</a>.) Google has stated that <a href="http://www.chromium.org/developers/design-documents/indexeddb">they are considering IndexedDB support</a> for Chromium and Google Chrome. And even Microsoft has said that IndexedDB &#8220;<a href="http://blogs.msdn.com/b/ie/archive/2010/03/09/working-with-the-html5-community.aspx">is a great solution for the web</a>.&#8221;
+<p>V době psaní této knihy je IndexedDB implementováno pouze v <a href=https://developer.mozilla.org/en/Firefox_4_for_developers>beta verzi Firefox 4</a>. (Navzdory tomu, že Mozilla říkala <a href="http://hacks.mozilla.org/2010/06/beyond-html5-database-apis-and-the-road-to-indexeddb/">nikdy nebudeme implementovat Web SQL Database</a>.) Google uvedl, <a href="http://www.chromium.org/developers/design-documents/indexeddb">že uvažuje o podpoře IndexedDB</a> pro Chromium a Google Chrome. A dokonce i Microsoft říkal, že  IndexedDB &#8222;<a href="http://blogs.msdn.com/b/ie/archive/2010/03/09/working-with-the-html5-community.aspx">je skvělé řešení pro web</a>.&#8220;
 
-<p>So what can you, as a web developer, do with IndexedDB? At the moment, virtually nothing beyond some technology demos. A year from now? Maybe something. Check the &#8220;Further Reading&#8221; section for links to some good tutorials to get you started.
+<p>Co tedy můžete jako webový vývojář dělat s IndexedDB? V současné době prakticky nic jiného než nějaké technologické demo. Ode dneška za rok? Možná něco. Podívejte se na &#8222;Další Čtení&#8220;, sekce s linky, na některé dobré tutorialy jak začít.
 
 <p class=a>&#x2767;
 
-<h2 id=further-reading>Further Reading</h2>
+<h2 id=further-reading>Další čtení</h2>
 
 <p><abbr>HTML5</abbr> storage:
 
 <ul>
-<li><a href="http://dev.w3.org/html5/webstorage/"><abbr>HTML5</abbr> Storage</a> specification
-<li><a href="http://msdn.microsoft.com/en-us/library/cc197062(VS.85).aspx">Introduction to DOM Storage</a> on <abbr>MSDN</abbr>
-<li><a href="http://dev.opera.com/articles/view/web-storage/">Web Storage: easier, more powerful client-side data storage</a> on Opera Developer Community
-<li><a href="https://developer.mozilla.org/en/dom/storage">DOM Storage</a> on Mozilla Developer Center. (Note: most of this page is devoted to Firefox&#8217;s prototype implementation of a <code>globalStorage</code> object, a non-standard precursor to <code>localStorage</code>. Mozilla added support for the standard <code>localStorage</code> interface in Firefox 3.5.)
-<li><a href="http://www.ibm.com/developerworks/xml/library/x-html5mobile2/">Unlock local storage for mobile Web applications with HTML5</a>, a tutorial on IBM DeveloperWorks
+<li><a href="http://dev.w3.org/html5/webstorage/"><abbr>HTML5</abbr> Storage</a> specifikace
+<li><a href="http://msdn.microsoft.com/en-us/library/cc197062(VS.85).aspx">Introduction to DOM Storage</a> na <abbr>MSDN</abbr>
+<li><a href="http://dev.opera.com/articles/view/web-storage/">Web Storage: easier, more powerful client-side data storage</a> na Opera Developer Community
+<li><a href="https://developer.mozilla.org/en/dom/storage">DOM Storage</a> na Mozilla Developer Center. (Poznámka: Většina této stránky je věnována implementaci Firefox prototypu <code>globalStorage</code> objektu, nestandardního předchůdce <code>localStorage</code>. Mozilla přidala podporu pro standardní <code>localStorage</code> rozhraní do Firefox 3.5.)
+<li><a href="http://www.ibm.com/developerworks/xml/library/x-html5mobile2/">Unlock local storage for mobile Web applications with HTML5</a>, tutorial na IBM DeveloperWorks
 </ul>
 
-<p>Early work by Brad Neuberg <i>et. al.</i> (pre-<abbr>HTML5</abbr>):
+<p>Raná práce Brad Neuberga <i>et. al.</i> (pre-<abbr>HTML5</abbr>):
 
 <ul>
-<li><a href="http://codinginparadise.org/weblog/2005/08/ajax-internet-explorer-has-native.html">Internet Explorer Has Native Support for Persistence?!?!</a> (about the <code>userData</code> object in IE)
-<li><a href="http://docs.google.com/View?docid=dhkhksk4_8gdp9gr#dojo_storage">Dojo Storage</a>, part of a larger tutorial about the (now-defunct) Dojo Offline library
+<li><a href="http://codinginparadise.org/weblog/2005/08/ajax-internet-explorer-has-native.html">Internet Explorer Has Native Support for Persistence?!?!</a> (o <code>userData</code> objectu v IE)
+<li><a href="http://docs.google.com/View?docid=dhkhksk4_8gdp9gr#dojo_storage">Dojo Storage</a>, část většího tutorialu o (nyní zaniklé) Dojo Offline library
 <li><a href="http://api.dojotoolkit.org/jsdoc/HEAD/dojox.storage.manager"><code>dojox.storage.manager</code> <abbr>API</abbr> reference</a>
-<li><a href="http://svn.dojotoolkit.org/src/dojox/trunk/storage/">dojox.storage</a> Subversion repository
+<li><a href="http://svn.dojotoolkit.org/src/dojox/trunk/storage/">dojox.storage</a> Subversion repositář
 </ul>
 
 <p>Web SQL Database:
 
 <ul>
-<li><a href="http://dev.w3.org/html5/webdatabase/">Web SQL Database</a> specification
+<li><a href="http://dev.w3.org/html5/webdatabase/">Web SQL Database</a> specifikace
 <li><a href="http://html5doctor.com/introducing-web-sql-databases/">Introducing Web <abbr>SQL</abbr> Databases</a>
 <li><a href="http://html5demos.com/database">Web Database demonstration</a>
-<lI><a href="http://zef.me/2774/persistence-js-an-asynchronous-javascript-orm-for-html5gears">persistence.js</a>, an &#8220;asynchronous JavaScript <abbr>ORM</abbr>&#8221; built on top of Web <abbr>SQL</abbr> Database and Gears
+<lI><a href="http://zef.me/2774/persistence-js-an-asynchronous-javascript-orm-for-html5gears">persistence.js</a>, &#8222;asynchronous JavaScript <abbr>ORM</abbr>&#8220; postavený na Web <abbr>SQL</abbr> Database a Gears
 </ul>
 
 <p>IndexedDB:
 
 <ul>
-<li><a href="http://dev.w3.org/2006/webapi/IndexedDB/">Indexed Database <abbr>API</abbr></a> specification
+<li><a href="http://dev.w3.org/2006/webapi/IndexedDB/">Indexed Database <abbr>API</abbr></a> specifikace
 <li><a href="http://hacks.mozilla.org/2010/06/beyond-html5-database-apis-and-the-road-to-indexeddb/">Beyond HTML5: Database APIs and the Road to IndexedDB</a>
 <li><a href="http://hacks.mozilla.org/2010/06/comparing-indexeddb-and-webdatabase/">Firefox 4: An early walk-through of IndexedDB</a>
 </ul>
 
 <p class=a>&#x2767;
 
-<p>This has been &#8220;The Past, Present &amp; Future of Local Storage for Web Applications.&#8221; The <a href=table-of-contents.html>full table of contents</a> has more if you&#8217;d like to keep reading.
+<p>Toto byla &#8222;Minulost, současnost &amp; budoucnost Lokálního Úložiště pro Webové Aplikace.&#8220; Pokud budete chtít pokračovat ve čtení, přejděte na <a href=table-of-contents.html>celý obsah knihy</a>.
 
 <div class=pf>
-<h4>Did You Know?</h4>
+<h4>Víte že?</h4>
 <div class=moneybags>
-<blockquote><p>In association with Google Press, O&#8217;Reilly is distributing this book in a variety of formats, including paper, ePub, Mobi, and <abbr>DRM</abbr>-free <abbr>PDF</abbr>. The paid edition is called &#8220;HTML5: Up &amp; Running,&#8221; and it is available now. This chapter is included in the paid edition.
-<p>If you liked this chapter and want to show your appreciation, you can <a href="http://www.amazon.com/HTML5-Up-Running-Mark-Pilgrim/dp/0596806027?ie=UTF8&amp;tag=diveintomark-20&amp;creativeASIN=0596806027">buy &#8220;HTML5: Up &amp; Running&#8221; with this affiliate link</a> or <a href=http://oreilly.com/catalog/9780596806033>buy an electronic edition directly from O&#8217;Reilly</a>. You&#8217;ll get a book, and I&#8217;ll get a buck. I do not currently accept direct donations.
+<blockquote><p>Ve spolupráci s Google Press, O&#8217;Reilly nabízí anglickou verzi této knihy v řadě formátů včetně tištěné podoby, ePub, Mobi a <abbr>PDF</abbr> bez <abbr>DRM</abbr>. Placená verze se jmenuje &#8222;HTML5: Up &amp; Running,&#8220; a můžete ji mít ihned. Tato kapitola je zahrnuta v placené verzi.
+<p>Pokud se vám tahle kapitola líbila a chcete autora anglického originálu podpořit <a href="http://www.amazon.com/HTML5-Up-Running-Mark-Pilgrim/dp/0596806027?ie=UTF8&amp;tag=diveintomark-20&amp;creativeASIN=0596806027">kupte si &#8222;HTML5: Up &amp; Running&#8220; skrz tento affiliate odkaz</a> nebo <a href=http://oreilly.com/catalog/9780596806033>elektronickou verzi přímo od O&#8217;Reilly</a>.
 </blockquote>
 </div>
 </div>
 
-<p class=c>Copyright MMIX&ndash;MMXI <a href=about.html>Mark Pilgrim</a>
+<p class=c>Copyright MMIX&ndash;MMXI <a href=about.html>Mark Pilgrim</a>, český překlad <a href="http://www.koudelavojtech.cz/">Vojtěch Koudela</a>
 
 <form action=http://www.google.com/cse><div><input type=hidden name=cx value=013556084273090989037:f1s-wnbz68q><input type=hidden name=ie value=UTF-8><input type=search name=q size=25 placeholder="powered by Google&trade;">&nbsp;<input type=submit name=sa value=Hledat></div></form>
 <script src=j/jquery.js></script>
